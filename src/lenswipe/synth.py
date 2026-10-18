@@ -20,7 +20,6 @@ def jpeg_segment(marker: int, payload: bytes) -> bytes:
 
 def build_exif_segment(*, make=True, gps=True, extra_ifd0=()) -> bytes:
     """APP1 segment: `b'Exif\\0\\0'` + TIFF built by build_tiff()."""
-    entries = list(extra_ifd0)
     base = SAMPLE_IFD0 if make else tuple(e for e in SAMPLE_IFD0
                                           if e[0] != 0x010F)
     entries = tuple(extra_ifd0) + base
