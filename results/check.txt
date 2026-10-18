@@ -1,0 +1,13 @@
+$ lenswipe check examples/ -r          # mixed content, GPS present -> 1
+DIRTY    examples/banner.webp  (exif!, xmp)
+CLEAN    examples/clean-logo.jpg
+DIRTY    examples/summit.png  (text, text, text, text, exif!)
+DIRTY    examples/sunset.jpg  (exif!, xmp, xmp-ext, iptc)
+
+4 file(s): 1 clean, 3 dirty
+exit=1
+$ lenswipe check examples/clean-logo.jpg
+CLEAN    examples/clean-logo.jpg
+
+1 file(s): 1 clean, 0 dirty
+exit=0

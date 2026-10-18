@@ -1,0 +1,28 @@
+[project]
+name = "lenswipe"
+version = "1.0.0"
+description = "Offline EXIF/metadata wiper for JPEG, PNG and WebP: inventory tags (GPS flagged), strip metadata while leaving image data byte-identical, verify cleanliness with a CI-friendly exit code."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Wsh7Ash" }]
+keywords = ["exif", "privacy", "metadata", "jpeg", "png", "webp"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Multimedia :: Graphics",
+]
+dependencies = []
+
+[project.scripts]
+lenswipe = "lenswipe.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]

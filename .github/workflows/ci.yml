@@ -1,0 +1,32 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.10", "3.12", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Syntax check
+        run: python -m compileall -q src tools
+      - name: Tests
+        run: python -m unittest discover -s tests -t .
+      - name: CLI end-to-end
+        run: |
+          python tools/make_examples.py
+          PYTHONPATH=src python -m lenswipe report examples/ -r
+          PYTHONPATH=src python -m lenswipe check examples/clean-logo.jpg
+          test "$(PYTHONPATH=src python -m lenswipe check examples/sunset.jpg; echo $?)" = "1"
+          mkdir -p /tmp/clean && PYTHONPATH=src python -m lenswipe wipe examples/ -r --output-dir /tmp/clean
+          PYTHONPATH=src python -m lenswipe check /tmp/clean -r
+      - name: Secret scan (guard)
+        run: |
+          ! grep -rInE "(AKIA[0-9A-Z]{16}|ghp_[A-Za-z0-9]{20,}|-----BEGIN .*PRIVATE KEY)" src tests docs tools *.md || true

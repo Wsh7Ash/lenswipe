@@ -1,0 +1,23 @@
+$ lenswipe wipe examples/ -r --output-dir $TMP
+wiped examples/banner.webp -> C:/Users/0/AppData/Local/Temp/tmp.5gYaxPWnEw/banner.wiped.webp
+  removed: exif(16 tags, GPS), xmp · 512 -> 76 bytes
+  verified: post-wipe scan found no metadata
+unchanged examples/clean-logo.jpg (already clean)
+wiped examples/summit.png -> C:/Users/0/AppData/Local/Temp/tmp.5gYaxPWnEw/summit.wiped.png
+  removed: text, text, text, text, exif(16 tags, GPS) · 649 -> 82 bytes
+  verified: post-wipe scan found no metadata
+wiped examples/sunset.jpg -> C:/Users/0/AppData/Local/Temp/tmp.5gYaxPWnEw/sunset.wiped.jpg
+  removed: exif(16 tags, GPS), xmp, xmp-ext, iptc · 599 -> 59 bytes
+  verified: post-wipe scan found no metadata
+
+4 file(s): 4 ok, 0 failed
+exit=0
+$ lenswipe check $TMP -r               # every output must be clean -> 0
+CLEAN    C:/Users/0/AppData/Local/Temp/tmp.5gYaxPWnEw/banner.wiped.webp
+CLEAN    C:/Users/0/AppData/Local/Temp/tmp.5gYaxPWnEw/summit.wiped.png
+CLEAN    C:/Users/0/AppData/Local/Temp/tmp.5gYaxPWnEw/sunset.wiped.jpg
+
+3 file(s): 3 clean, 0 dirty
+exit=0
+$ lenswipe report $TMP/summit.png --json | head -30
+lenswipe: C:/Users/0/AppData/Local/Temp/tmp.5gYaxPWnEw/summit.png: no such file

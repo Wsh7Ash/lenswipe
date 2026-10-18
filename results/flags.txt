@@ -1,0 +1,30 @@
+$ lenswipe wipe examples/sunset.jpg --dry-run --json
+{
+  "errors": [],
+  "files": [
+    {
+      "bytes_in": 599,
+      "bytes_out": 59,
+      "dry_run": true,
+      "error": null,
+      "out": "examples/sunset.wiped.jpg",
+      "path": "examples/sunset.jpg",
+      "removed": [
+        "exif(16 tags, GPS)",
+        "xmp",
+        "xmp-ext",
+        "iptc"
+      ],
+      "verified": true
+    }
+  ]
+}
+exit=0
+$ lenswipe check examples/ -r --all     # --all treats JFIF/pHYs as metadata
+DIRTY    examples/banner.webp  (icc, exif!, xmp)
+DIRTY    examples/clean-logo.jpg  (jfif)
+DIRTY    examples/summit.png  (presentation, text, text, text, text, exif!)
+DIRTY    examples/sunset.jpg  (jfif, exif!, xmp, xmp-ext, icc, iptc)
+
+4 file(s): 0 clean, 4 dirty
+exit=1
